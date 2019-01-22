@@ -12,10 +12,10 @@ import com.shop.utilities.InvalidParamException;
 @Entity("shops")
 public class Shop {
 	
-	private static int lastId = 1;
+	private static int lastId;
 	
 	@Id
-	private int shopId;
+	private Integer shopId;
 	private String nameShop;
 	private int maxCapacity;
 	
@@ -26,7 +26,7 @@ public class Shop {
 		
 	}
 	
-	public Shop(int shopId, String nameShop, int maxCapacity) throws InvalidParamException {
+	public Shop(Integer shopId, String nameShop, int maxCapacity) throws InvalidParamException {
 		if(nameShop == null || nameShop.trim().equals(""))
 			throw new InvalidParamException();
 		if(maxCapacity < 0)
@@ -39,7 +39,7 @@ public class Shop {
 	}
 
 
-	public int getShopId() {
+	public Integer getShopId() {
 		return shopId;
 	}
 
@@ -62,6 +62,10 @@ public class Shop {
 			throw new Exception(); 
 			this.allPictures.add(picture);		
 		
+	}
+	
+	public void burnPictures() {
+		this.allPictures.removeAll(allPictures);
 	}
 	
 	

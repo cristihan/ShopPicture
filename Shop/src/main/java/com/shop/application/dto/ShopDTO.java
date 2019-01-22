@@ -7,6 +7,8 @@ import com.google.gson.annotations.Expose;
 import com.shop.domain.Picture;
 import com.shop.domain.Shop;
 
+import com.shop.utilities.NotFoundException;
+
 public class ShopDTO {
 	
 	@Expose
@@ -23,7 +25,10 @@ public class ShopDTO {
 		
 	}
 	
-	public ShopDTO(Shop shop) {
+	public ShopDTO(Shop shop) throws NotFoundException  {
+		if(shop == null)
+			throw new NotFoundException();
+		
 		this.shopId = shop.getShopId();
 		this.nameShop = shop.getNameShop();
 		this.maxCapacity = shop.getMaxCapacity();
@@ -48,7 +53,7 @@ public class ShopDTO {
 	}
 
 	public int getMaxCapacity() {
-		if(this.maxCapacity >=0) return 0;
+		if(this.maxCapacity <=0) return 1;
 		return this.maxCapacity;
 	}
 

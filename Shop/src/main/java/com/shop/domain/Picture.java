@@ -1,33 +1,32 @@
 package com.shop.domain;
 
-import java.time.LocalDate;
-//import java.util.Calendar;
-//import java.util.Date;
+import java.util.Calendar;
 
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 import com.shop.utilities.InvalidParamException;
 
-
+@Entity("picture")
 public class Picture {
 	
 	private static int lastId = 1;
 	@Id
-	private int pictureId;
+	private Integer pictureId;
 	
 	private String nameAuthor;
 	private String namePicture;
 	private double price;
 	
 	@Embedded
-	private LocalDate dataIn;
+	private Calendar dataIn;
 	
 	public Picture() {
 		
 	}
 	
-	public Picture(int pictureId, String nameAuthor, String namePicture, double price, LocalDate dataIn) throws InvalidParamException {
+	public Picture(Integer pictureId, String nameAuthor, String namePicture, double price, Calendar dataIn) throws InvalidParamException {
 		if(nameAuthor == null || nameAuthor.trim().equals(""))
 			throw new InvalidParamException();
 		if(namePicture == null || namePicture.trim().equals(""))
@@ -40,11 +39,11 @@ public class Picture {
 		this.nameAuthor = nameAuthor;
 		this.namePicture = namePicture;
 		this.price = price;
-		this.dataIn = dataIn;
+		this.dataIn = Calendar.getInstance();
 	}
 	
 	
-	public int getPictureId() {
+	public Integer getPictureId() {
 		return pictureId;
 	}
 
@@ -60,7 +59,7 @@ public class Picture {
 		return price;
 	}
 
-	public LocalDate getEnterDate() {
+	public Calendar getEnterDate() {
 		return dataIn;
 	}
 
@@ -69,17 +68,8 @@ public class Picture {
 		// TODO Auto-generated method stub
 		return super.equals(arg0);
 	}
-	
-	
-	
 
-//	public Date getDateIn() {
-//		return dateIn;
-//	}
-//	
-//	public void newEntrada() {
-//		dateIn = Calendar.getInstance().getTime();
-//	}
+
 
 }
 	
